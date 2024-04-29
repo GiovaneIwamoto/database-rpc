@@ -5,68 +5,98 @@
 
 #define MAX_WORD_LENGTH 100
 
+void print_menu() {
+    printf("\nMenu:\n");
+    printf("1. Insert word\n");
+    printf("2. Search word\n");
+    printf("3. Remove word\n");
+    printf("4. Exit\n");
+    printf("Choose an option: ");
+}
+
 int main(int argc, char *argv[]) {
-    CLIENT *cl; // Handle do cliente
-    char *server; // Endereço do servidor
-    char *word; // Palavra a ser manipulada no banco de dados remoto
-    int result; // Resultado das operações remotas
+    CLIENT *clnt; // Client handle
+    char *server; // Server adress
+    
+    char *word = (char *)malloc(MAX_WORD_LENGTH * sizeof(char)); 
+    int result;
+    int option;
 
     if (argc < 2) {
-        fprintf(stderr, "Uso: %s servidor\n", argv[0]);
+        fprintf(stderr, "Usage: %s <server>\n", argv[0]);
         exit(1);
     }
     server = argv[1];
 
-    // Criar handle do cliente
-    cl = clnt_create(server, RBDPROG, RDBVERS, "tcp");
-    if (cl == NULL) {
+    // Create client handle
+    clnt = clnt_create(server, RBDPROG, RDBVERS, "tcp");
+    if (clnt == NULL) {
         clnt_pcreateerror(server);
         exit(1);
     }
 
-    // Inicializar o banco de dados remoto
-    result = inicializar_1(NULL, cl);
+    // Initialize remote database    
+    result = inicializar_1(NULL, clnt);
     if (result == 0) {
-        fprintf(stderr, "Erro ao inicializar o banco de dados remoto\n");
-        clnt_perror(cl, server);
+        fprintf(stderr, "Error initializing remote database\n");
+        clnt_perror(clnt, server);
         exit(1);
     } else {
-        printf("Banco de dados remoto inicializado com sucesso\n");
+        printf("Remote database initialized successfully\n");
     }
 
-    // Exemplo de inserção de uma palavra no banco de dados remoto
-    word = "exemplo";
-    result = insere_1(&word, cl);
-    if (result == 0) {
-        fprintf(stderr, "Erro ao inserir a palavra no banco de dados remoto\n");
-        clnt_perror(cl, server);
-        exit(1);
-    } else {
-        printf("Palavra inserida no banco de dados remoto\n");
-    }
+    while (1) {
+        print_menu();
+        scanf("%d", &option);
 
-    // Exemplo de busca de uma palavra no banco de dados remoto
-    word = "exemplo";
-    result = busca_1(&word, cl);
-    if (result == 0) {
-        printf("Palavra não encontrada no banco de dados remoto\n");
-    } else {
-        printf("Palavra encontrada no banco de dados remoto\n");
-    }
+        switch (option) {
+            case 1: // Insert word
+                printf("Enter the word to be inserted: ");
+                scanf("%s", word);
+                result = insere_1(&word, clnt);
+                if (result == 0) {
+                    fprintf(stderr, "Error inserting word into remote database\n");
+                    clnt_perror(clnt, server);
+                    exit(1);
+                } else {
+                    printf("Word inserted into remote database\n");
+                }
+                break;
 
-    // Exemplo de remoção de uma palavra do banco de dados remoto
-    word = "exemplo";
-    result = remove_1(&word, cl);
-    if (result == 0) {
-        fprintf(stderr, "Erro ao remover a palavra do banco de dados remoto\n");
-        clnt_perror(cl, server);
-        exit(1);
-    } else {
-        printf("Palavra removida do banco de dados remoto\n");
-    }
+            case 2: // Search word
+                printf("Enter the word to be searched: ");
+                scanf("%s", word);
+                result = busca_1(&word, clnt);
+                if (result == 0) {
+                    printf("Word not found in remote database\n");
+                } else {
+                    printf("Word found in remote database\n");
+                }
+                break;
 
-    // Destruir handle do cliente
-    clnt_destroy(cl);
+            case 3: // Remove word
+                printf("Enter the word to be removed: ");
+                scanf("%s", word);
+                result = remove_1(&word, clnt);
+                if (result == 0) {
+                    fprintf(stderr, "Error removing word from remote database\n");
+                    clnt_perror(clnt, server);
+                } else {
+                    printf("Word removed from remote database\n");
+                }
+                break;
+
+            case 4: // Exit
+                printf("Exiting the program.\n");
+                clnt_destroy(clnt);
+                exit(0);
+                break;
+
+            default:
+                printf("Invalid option\n");
+                break;
+        }
+    }
 
     return 0;
 }

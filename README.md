@@ -1,14 +1,15 @@
-rpcgen rbd.x 
+How to run RPC Gen
+rpcgen rbd.x
 
 Erro:  include rpc.h
 
 Compilar com as flags extras:
 
 Servidor:
- $ gcc -o rbd_server rbd_sif.c rbd_svc.c rbd_srp.c rbd_xdr.c -I/usr/include/tirpc -ltirpc
+`$ gcc -o rbd_server rbd_sif.c rbd_svc.c rbd_srp.c rbd_xdr.c -I/usr/include/tirpc -ltirpc`
 
 Cliente:
-$ gcc -o rbd_client rbd_clnt.c rbd_client.c rbd_xdr.c -I/usr/include/tirpc -ltirpc 
+`$ gcc -o rbd_client rbd_clnt.c rbd_client.c rbd_xdr.c -I/usr/include/tirpc -ltirpc` 
 
 Obs: Caso for usar o código de interface do cliente (rbd.cif.c), para o código ficar mais polido, compilar com
 
@@ -26,8 +27,6 @@ No cliente, criar e alocar a variável que recebe as palavras a serem usadas no 
 Exemplo:
   char *message = (char *) malloc(MAXWORD);
  
-
-
 Erro no portmap
 
 Iniciar o serviço com
