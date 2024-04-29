@@ -1,45 +1,30 @@
-How to run RPC Gen
-rpcgen rbd.x
+# DATABASE RPC
 
-Erro:  include rpc.h
+### **INSTALLATION GUIDE**
 
-Compilar com as flags extras:
+How to run RPC Generator
 
-Servidor:
+`rpcgen rbd.x`
+
+Compile Server:
+
 `$ gcc -o rbd_server rbd_sif.c rbd_svc.c rbd_srp.c rbd_xdr.c -I/usr/include/tirpc -ltirpc`
 
-Cliente:
+Compile Client:
+
 `$ gcc -o rbd_client rbd_clnt.c rbd_client.c rbd_xdr.c -I/usr/include/tirpc -ltirpc` 
-
-Obs: Caso for usar o código de interface do cliente (rbd.cif.c), para o código ficar mais polido, compilar com
-
-$ gcc -o rbd_client rbd_cif.c rbd_clnt.c rbd_client.c rbd_xdr.c -I/usr/include/tirpc -ltirpc -fcommon
-
-  #Atenção para alterar o nome da variável "clnt" para "handle" em rbd_client.c:
-   1- comentar a linha  de definição de clnt:  //CLIENT *clnt;  //pois está criada no rbd_cif.h como "handle"
-   2- Criar o CLIENT com nome de "handle":
-      handle = clnt_create(...)
  
+Portmap Error init service with:
 
-Erro:  call failed: RPC: Can't encode arguments
+`$ /etc/init.d/portmap start`
 
-No cliente, criar e alocar a variável que recebe as palavras a serem usadas no banco
-Exemplo:
-  char *message = (char *) malloc(MAXWORD);
- 
-Erro no portmap
+`$ service portmap start`
+  
+Install Portmap:
 
-Iniciar o serviço com
-  $ /etc/init.d/portmap start (ou stop) OU
-  $ service portmap start
-
-Erro: Failed to start portmap.service: Unit portmap.service not found.
-
-- Instalar o portmap
- $ sudo apt install portmap
+`$ sudo apt install portmap`
 
 
- Em distribuições baseadas em Arch Linux e Debian o portmap foi substituido por rpcbind
- 
- Se necessário instalar rpcbind e então iniciar o serviço
- $ sudo systemctl start rpcbind
+In Arch Linux and Debian-based distributions, portmap has been replaced by rpcbind.
+
+`$ sudo systemctl start rpcbind`
