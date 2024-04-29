@@ -6,12 +6,11 @@
 #define MAX_WORD_LENGTH 100
 
 void print_menu() {
-    printf("\nMenu:\n");
-    printf("1. Insert word\n");
+    printf("\n1. Insert word\n");
     printf("2. Search word\n");
     printf("3. Remove word\n");
     printf("4. Exit\n");
-    printf("Choose an option: ");
+    printf("\nChoose an option: ");
 }
 
 int main(int argc, char *argv[]) {
@@ -19,7 +18,7 @@ int main(int argc, char *argv[]) {
     char *server; // Server adress
     
     char *word = (char *)malloc(MAX_WORD_LENGTH * sizeof(char)); 
-    int result;
+    int *result;
     int option;
 
     if (argc < 2) {
