@@ -1,3 +1,4 @@
+rpcgen rbd.x 
 
 Erro:  include rpc.h
 

@@ -1,0 +1,7 @@
+/rbd/rbd_clnt.c
+/rbd/rbd_server
+/rbd/rbd_svc.c
+/rbd/rbd_xdr.c
+/rbd/rbd.h
+/rbd/rbd_client
+.vscode
