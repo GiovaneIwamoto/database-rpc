@@ -1,52 +1,47 @@
-/* rbd_srp.c - inicializar, insere, remove, busca*/ 
+/* rbd_srp.c - initialize, insert, remove, search*/ 
 
 #include "rbd_srp.h"
 
+char bd[BDSIZE][MAXWORD];
+int  nwords = 0;
 
-
-/* Procedimentos remotos do servidor e dados globais */ 
-
-
-char bd[BDSIZE][MAXWORD]; /* armazena o dicionário de palavras */ 
-int  npalavras = 0;   /* número de palavras no dicionário */ 
-
-int inicializar() 
+int initialize() 
 { 
-    printf("Inicializando o banco. BD com zero palavras.\n");
-    npalavras = 0; 
+    printf("Initializing database.\n");
+    nwords = 0; 
      return 1; 
 } 
 
-int insere(palavra) 
-char *palavra; 
+int insere(word) 
+char *word; 
 { 
-     printf("Inserindo BD[%d]=%s\n", npalavras, palavra);
-     strcpy(bd[npalavras], palavra); 
-     npalavras++; 
-     return npalavras; 
+     printf("Inserting at database [%d] = %s\n", nwords, word);
+     strcpy(bd[nwords], word); 
+     nwords++; 
+     return nwords; 
 }
 
-int remover(palavra) 
-char *palavra; 
+int remove(word) 
+char *word; 
 { 
   int i; 
-  for (i=0; i<npalavras; i++) 
-   if (strcmp(palavra, bd[i]) == 0) { 
-        printf("Removendo BD[%d]=%s\n", i, palavra);
-        npalavras--; 
-        strcpy(bd[i], bd[npalavras]); 
+  for (i=0; i<nwords; i++) 
+   if (strcmp(word, bd[i]) == 0) { 
+        printf("Removing from database [%d] = %s\n", i, word);
+        nwords--; 
+        strcpy(bd[i], bd[nwords]); 
         return 1; 
    } 
   return 0; 
 } 
 
-int busca(palavra) 
-char *palavra; 
+int search(word) 
+char *word; 
 { 
   int i; 
-  for (i=0; i<npalavras; i++) 
-   if (strcmp(palavra, bd[i]) == 0 ) {
-       printf("Palavra %s encontrada em BD[%d]\n", palavra, i);
+  for (i=0; i<nwords; i++) 
+   if (strcmp(word, bd[i]) == 0 ) {
+       printf("Word %s not found\n", word);
        return 1; 
    }
   return 0; 

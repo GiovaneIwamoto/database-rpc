@@ -1,25 +1,25 @@
-/* rbd_cif.c - inicializar, insere, remove, busca */ 
+/* rbd_cif.c - initialize, insert, remove, search */ 
 
 #include "rbd_cif.h"
 
-int inicializar() 
+int initialize() 
 { 
      int * result;
   
-     result = inicializar_1(NULL,handle); 
+     result = initialize_1(NULL,handle); 
      if (result == (int *)NULL) 
          cli_error();
      
      return *result; 
 } 
 
-int insere(char *item) 
+int insert(char *item) 
 { 
      char **arg; 
      int * result;
      
      arg = &item; 
-     result =  insere_1(arg, handle); 
+     result =  insert_1(arg, handle); 
      
      if (result == (int *)NULL) 
          cli_error();
@@ -27,7 +27,7 @@ int insere(char *item)
       return *result; 
 } 
 
-int remover(char *item) 
+int remove(char *item) 
 { 
   char **arg; 
   int * result;
@@ -41,13 +41,13 @@ int remover(char *item)
   return *result;
 } 
 
-int busca(char *item) 
+int search(char *item) 
 { 
   char **arg; 
   int * result;
   arg = &item; 
 
-  result = busca_1(arg, handle); 
+  result = search_1(arg, handle); 
   if (result == (int *)NULL) 
       cli_error();
 

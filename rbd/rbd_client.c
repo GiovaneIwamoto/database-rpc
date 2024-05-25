@@ -35,7 +35,7 @@ int main(int argc, char *argv[]) {
     }
 
     // Initialize remote database    
-    result = inicializar_1(NULL, clnt);
+    result = initialize_1(NULL, clnt);
     if (result == 0) {
         fprintf(stderr, "Error initializing remote database\n");
         clnt_perror(clnt, server);
@@ -52,7 +52,7 @@ int main(int argc, char *argv[]) {
             case 1: // Insert word
                 printf("Enter the word to be inserted: ");
                 scanf("%s", word);
-                result = insere_1(&word, clnt);
+                result = insert_1(&word, clnt);
                 if (result == 0) {
                     fprintf(stderr, "Error inserting word into remote database\n");
                     clnt_perror(clnt, server);
@@ -65,7 +65,7 @@ int main(int argc, char *argv[]) {
             case 2: // Search word
                 printf("Enter the word to be searched: ");
                 scanf("%s", word);
-                result = busca_1(&word, clnt);
+                result = search_1(&word, clnt);
                 if (result == 0) {
                     printf("Word not found in remote database\n");
                 } else {

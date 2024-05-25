@@ -1,4 +1,4 @@
-/* rbd_srp.h - funções do servidor: inicializar, insere, remove, busca */ 
+/* rbd_srp.h - server: initialize, insert, remove, search */ 
 
 #include <rpc/rpc.h> 
 #include "rbd.h"
@@ -7,13 +7,13 @@
 #define MAXWORD  32
 
 
-int inicializar();
+int initialize();
 
-int insere(char *);
+int insert(char *);
 
-int remover(char *);
+int remove(char *);
 
-int busca(char *);
+int search(char *);
 
 
 

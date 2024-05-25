@@ -1,18 +1,18 @@
-/* rbd_cif.h - inicializar, insere, remove, busca */ 
+/* rbd_cif.h - initialize, insert, remove, search */ 
 #include <rpc/rpc.h> 
 #include "rbd.h"
 
 #define MAXWORD  32
 
-CLIENT *handle;  /* handle para procedimento remoto */ 
+CLIENT *handle;
 
-int inicializar();
+int initialize();
 
-int insere(char *);
+int insert(char *);
 
-int remover(char *);
+int remove(char *);
 
-int busca(char *);
+int search(char *);
 
 void cli_error();
 

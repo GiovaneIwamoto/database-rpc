@@ -1,23 +1,23 @@
-/* rbd_sif.c - inicializar_1_svc, insere_1_svc, remove_1_svc, busca_1_svc */ 
+/* rbd_sif.c - initialize_1_svc, insert_1_svc, remove_1_svc, search_1_svc */ 
 #include <rpc/rpc.h> 
 #include "rbd.h" 
 #include "rbd_srp.h"
 
 static int retcode; 
 
-int *inicializar_1_svc(i,req)
+int *initialize_1_svc(i,req)
 void *i;
 struct svc_req *req; 
 { 
-  retcode = inicializar(); 
+  retcode = initialize(); 
   return &retcode; 
 } 
 
-int *insere_1_svc(i,req) 
+int *insert_1_svc(i,req) 
 char **i; 
 struct svc_req *req;
 { 
-  retcode = insere(*i); 
+  retcode = insert(*i); 
   return &retcode; 
 }
 
@@ -25,14 +25,14 @@ int *remove_1_svc(i,req)
 char **i; 
 struct svc_req *req;
 { 
-      retcode = remover(*i); 
+      retcode = remove(*i); 
   return &retcode; 
 } 
 
-int *busca_1_svc(i,req) 
+int *search_1_svc(i,req) 
 char **i; 
 struct svc_req *req;
 { 
-  retcode = busca(*i); 
+  retcode = search(*i); 
   return &retcode; 
 }
