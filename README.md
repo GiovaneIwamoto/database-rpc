@@ -17,21 +17,19 @@ This program is designed to interact with a remote database by making _remote pr
 
 - **Removal**: Users can remove a word from the remote database
 
+---
+
 ### **INSTALLATION GUIDE**
 
-```c
+```ruby
 RPC generator:
 $ rpcgen rbd.x
 ```
 
-```java
-Compile server:
+```ruby
+Compile server and client:
 
 $ gcc -o rbd_server rbd_sif.c rbd_svc.c rbd_srp.c rbd_xdr.c -I/usr/include/tirpc -ltirpc
-```
-
-```shell
-Compile client:
 
 $ gcc -o rbd_client rbd_clnt.c rbd_client.c rbd_xdr.c -I/usr/include/tirpc -ltirpc
 $ gcc -o rbd_client rbd_cif.c rbd_clnt.c rbd_client.c rbd_xdr.c -I/usr/include/tirpc -ltirpc -fcommon
@@ -50,3 +48,11 @@ $ sudo apt install portmap
 Linux and Debian-based distros use Rpcbind:
 $ sudo systemctl start rpcbind
 ```
+
+---
+
+### **AUTHOR**
+
+- Giovane Hashinokuti Iwamoto - Computer Science student at UFMS - Brazil - MS
+
+I am always open to receiving constructive criticism and suggestions for improvement in my developed code. I believe that feedback is an essential part of the learning and growth process, and I am eager to learn from others and make my code the best it can be. Whether it's a minor tweak or a major overhaul, I am willing to consider all suggestions and implement the changes that will benefit my code and its users.
